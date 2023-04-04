@@ -12,11 +12,16 @@ use Crunz\Task\LoaderInterface;
 use Crunz\Task\TaskNumber;
 use Crunz\Task\Timezone;
 use Crunz\Task\WrongTaskInstanceException;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(
+    name: 'schedule:run',
+    description: 'Starts the event runner.'
+)]
 class ScheduleRunCommand extends Command
 {
     /** @var CollectionInterface */
@@ -55,8 +60,7 @@ class ScheduleRunCommand extends Command
      */
     protected function configure(): void
     {
-        $this->setName('schedule:run')
-            ->setDescription('Starts the event runner.')
+        $this
             ->setDefinition(
                 [
                     new InputArgument(

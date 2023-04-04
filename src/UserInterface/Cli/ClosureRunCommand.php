@@ -5,11 +5,17 @@ declare(strict_types=1);
 namespace Crunz\UserInterface\Cli;
 
 use Crunz\Application\Service\ClosureSerializerInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(
+    name: 'closure:run',
+    description: 'Executes a closure as a process.',
+    hidden: true
+)]
 class ClosureRunCommand extends SymfonyCommand
 {
     /** @var ClosureSerializerInterface */
@@ -28,8 +34,6 @@ class ClosureRunCommand extends SymfonyCommand
     protected function configure(): void
     {
         $this
-            ->setName('closure:run')
-            ->setDescription('Executes a closure as a process.')
             ->setDefinition(
                 [
                     new InputArgument(
@@ -40,7 +44,6 @@ class ClosureRunCommand extends SymfonyCommand
                 ]
             )
             ->setHelp('This command executes a closure as a separate process.')
-            ->setHidden(true)
         ;
     }
 

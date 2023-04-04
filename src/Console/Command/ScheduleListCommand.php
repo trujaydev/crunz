@@ -9,12 +9,17 @@ use Crunz\Exception\CrunzException;
 use Crunz\Task\CollectionInterface;
 use Crunz\Task\LoaderInterface;
 use Crunz\Task\WrongTaskInstanceException;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(
+    name: 'schedule:list',
+    description: 'Displays the list of scheduled tasks.'
+)]
 class ScheduleListCommand extends \Symfony\Component\Console\Command\Command
 {
     private const FORMAT_TEXT = 'text';
@@ -50,8 +55,6 @@ class ScheduleListCommand extends \Symfony\Component\Console\Command\Command
     {
         $possibleFormats = \implode('", "', self::FORMATS);
         $this
-            ->setName('schedule:list')
-            ->setDescription('Displays the list of scheduled tasks.')
             ->setDefinition(
                 [
                     new InputArgument(

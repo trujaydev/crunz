@@ -8,6 +8,7 @@ use Crunz\Application\Query\TaskInformation\TaskInformation;
 use Crunz\Application\Query\TaskInformation\TaskInformationHandler;
 use Crunz\Application\Query\TaskInformation\TaskInformationView;
 use Crunz\Task\TaskNumber;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Helper\TableCell;
@@ -16,6 +17,10 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(
+    name: 'task:debug',
+    description: 'Shows all information about task'
+)]
 final class DebugTaskCommand extends Command
 {
     /** @var TaskInformationHandler */
@@ -25,13 +30,12 @@ final class DebugTaskCommand extends Command
     {
         $this->taskInformationHandler = $taskInformationHandler;
 
-        parent::__construct('task:debug');
+        parent::__construct(self::getDefaultName());
     }
 
     protected function configure(): void
     {
         $this
-            ->setDescription('Shows all information about task')
             ->addArgument(
                 'taskNumber',
                 InputArgument::REQUIRED,

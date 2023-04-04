@@ -7,12 +7,17 @@ namespace Crunz\Console\Command;
 use Crunz\Filesystem\FilesystemInterface;
 use Crunz\Path\Path;
 use Crunz\Timezone\ProviderInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Filesystem\Filesystem;
 
+#[AsCommand(
+    name: 'publish:config',
+    description: 'Generates a config file within the project\'s root directory.'
+)]
 final class ConfigGeneratorCommand extends Command
 {
     public const CONFIG_FILE_NAME = 'crunz.yml';
@@ -42,8 +47,6 @@ final class ConfigGeneratorCommand extends Command
     protected function configure(): void
     {
         $this
-            ->setName('publish:config')
-            ->setDescription("Generates a config file within the project's root directory.")
             ->setHelp("This generates a config file in YML format within the project's root directory.")
         ;
     }

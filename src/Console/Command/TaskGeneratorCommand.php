@@ -7,12 +7,17 @@ namespace Crunz\Console\Command;
 use Crunz\Application\Service\ConfigurationInterface;
 use Crunz\Filesystem\FilesystemInterface;
 use Crunz\Path\Path;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 
+#[AsCommand(
+    name: 'make:task',
+    description: 'Generates a task file with one task.'
+)]
 class TaskGeneratorCommand extends Command
 {
     /**
@@ -53,8 +58,6 @@ class TaskGeneratorCommand extends Command
     protected function configure(): void
     {
         $this
-            ->setName('make:task')
-            ->setDescription('Generates a task file with one task.')
             ->setDefinition(
                 [
                     new InputArgument(
